@@ -1,0 +1,17 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  background: #ccc;
+  padding: var(--pd-md);
+
+  display: flex;
+  gap: var(--pd-md);
+}
+
+.content {
+  flex: 1;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
