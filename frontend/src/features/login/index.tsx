@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import styles from './index.module.css';
+import { Button } from '@/components/button';
 
 export async function Login() {
   return (
@@ -17,7 +18,10 @@ export async function Login() {
 
       <input type="email" name="email" />
       <input type="password" name="password" />
-      <button type="submit">Entrar</button>
+
+      <Button>
+        Entrar
+      </Button>
     </div>
   )
 }
