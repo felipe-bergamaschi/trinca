@@ -2,6 +2,11 @@
   --bg-primary: rgb(89, 99, 236);
   --bg-primary-hover: rgb(89, 99, 236, 0.9);
 
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+
+  --border-primary: rgba(0, 0, 0, 0.23);
+
   --pd-md: 16px;
 
   --spacing-xs: 4px;

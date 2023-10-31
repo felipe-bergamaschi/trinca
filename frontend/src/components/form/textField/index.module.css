@@ -1,0 +1,42 @@
+.inputContainer {
+  width: 100%;
+  position: relative;
+  margin: 8px;
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-primary);
+  padding: 0 var(--pd-md);
+
+  font-size: 16px;
+  color: var(--text-primary);
+  outline: none;
+  background-color: transparent !important;
+}
+
+.label {
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  padding: 2px 4px;
+  color: var(--text-secondary);
+  background-color: #fff;
+  font-size: 12px;
+}
+
+.input:focus {
+  border-color: var(--bg-primary);
+  border-width: 2px;
+  padding-left: 15px;
+}
+
+.input:focus+.label {
+  color: var(--bg-primary);
+}
+
+.input:-webkit-autofill {
+  background-color: red !important;
+}
