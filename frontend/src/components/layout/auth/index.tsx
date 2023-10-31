@@ -10,11 +10,10 @@ export function AuthLayout({ children }: AuthLayoutProps) {
     <main className={styles.main}>
       <div className={styles.content}>
         <Image
-          src="/vercel.svg"
-          alt="Vercel Logo"
-          className={styles.vercelLogo}
-          width={100}
-          height={24}
+          src="/logo-white.svg"
+          alt="Logo"
+          width={200}
+          height={200}
           priority
         />
       </div>

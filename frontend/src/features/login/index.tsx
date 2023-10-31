@@ -10,13 +10,22 @@ export async function Login() {
     <div className={styles.container}>
       <div className={styles.content}>
         <Image
-          src="/vercel.svg"
-          alt="Vercel Logo"
-          className={styles.vercelLogo}
-          width={100}
-          height={24}
+          src="/logo-black.svg"
+          alt="Logo"
+          width={52}
+          height={52}
           priority
         />
+
+        <div>
+          <h1>
+            Bem vindo de volta!
+          </h1>
+
+          <p>
+            Faça login para continuar
+          </p>
+        </div>
 
         <TextField
           type='email'
