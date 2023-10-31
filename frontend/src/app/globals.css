@@ -33,6 +33,11 @@
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135; */
   --pd-md: 16px;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
 }
 
 * {
