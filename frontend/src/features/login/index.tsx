@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './index.module.css';
 import { Button } from '@/components/button';
 import { TextField } from '@/components/form/textField';
+import { Text } from '@/components/text';
 
 export async function Login() {
   return (
@@ -18,13 +19,13 @@ export async function Login() {
         />
 
         <div className={styles.text}>
-          <h1>
+          <Text variant='h1'>
             Bem vindo de volta!
-          </h1>
+          </Text>
 
-          <p>
+          <Text color='secondary'>
             Faça login para continuar
-          </p>
+          </Text>
         </div>
 
         <TextField
