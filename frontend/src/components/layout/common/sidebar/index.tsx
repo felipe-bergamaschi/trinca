@@ -11,6 +11,9 @@ export function Sidebar() {
         width={48}
         height={48}
         priority
+        style={{
+          borderRadius: 'var(--radius-lg)',
+        }}
       />
 
       <div>
