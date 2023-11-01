@@ -1,0 +1,32 @@
+.container {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+}
+
+.container svg {
+  fill: var(--text-secondary);
+}
+
+.container,
+.container svg {
+  transition: 300ms ease-in-out;
+}
+
+.active,
+.container:hover {
+  background-color: var(--color-primary);
+}
+
+.active svg,
+.container:hover svg {
+  fill: #fff;
+}

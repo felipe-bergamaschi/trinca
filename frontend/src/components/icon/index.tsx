@@ -4,7 +4,7 @@ import { EventIcon } from '../../assets/svg/event'
 
 type IconName = 'home' | 'logout' | 'event';
 
-interface IconProps {
+export interface IconProps {
   name: IconName;
   size?: number;
   color?: string;
