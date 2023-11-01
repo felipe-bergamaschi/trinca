@@ -1,7 +1,6 @@
 .inputContainer {
   width: 100%;
   position: relative;
-  margin: 8px;
 }
 
 .input {
@@ -19,7 +18,7 @@
 
 .label {
   position: absolute;
-  top: -9px;
+  top: -8px;
   left: 14px;
   padding: 2px 4px;
   color: var(--text-secondary);
