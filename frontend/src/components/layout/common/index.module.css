@@ -3,5 +3,18 @@
   width: 100%;
   display: flex;
   overflow: hidden;
-  gap: 16px;
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  flex: 1;
+  background-color: var(--bg-primary);
+  border-top-left-radius: 16px;
+  overflow: hidden;
 }
