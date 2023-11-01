@@ -4,8 +4,11 @@ import { EventIcon } from '../../assets/svg/event'
 import { NotificationIcon } from '../../assets/svg/notification'
 import { SettingsIcon } from '../../assets/svg/settings'
 import { AddIcon } from '../../assets/svg/add'
+import { GroupIcon } from '../../assets/svg/group'
+import { PaidIcon } from '../../assets/svg/paid'
+import { PlaceIcon } from '../../assets/svg/place'
 
-type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add';
+type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add' | 'group' | 'paid' | 'place';
 
 export interface IconProps {
   name: IconName;
@@ -28,6 +31,12 @@ export function Icon({ name, size = 24, color = '#000' }: IconProps) {
         return <SettingsIcon />
       case 'add':
         return <AddIcon />
+      case 'group':
+        return <GroupIcon />
+      case 'paid':
+        return <PaidIcon />
+      case 'place':
+        return <PlaceIcon />
     }
   }
 
