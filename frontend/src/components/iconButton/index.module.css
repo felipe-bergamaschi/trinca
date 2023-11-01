@@ -1,7 +1,4 @@
 .container {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -21,12 +18,19 @@
   transition: 300ms ease-in-out;
 }
 
-.active,
 .container:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.container:hover svg {
+  fill: var(--color-primary);
+}
+
+
+.active {
   background-color: var(--color-primary);
 }
 
-.active svg,
-.container:hover svg {
+.active svg {
   fill: #fff;
 }

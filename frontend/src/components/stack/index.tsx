@@ -6,6 +6,8 @@ interface StackProps {
   children: React.ReactNode
   direction?: 'row' | 'column'
   gap?: StackSpacing
+  align?: React.CSSProperties['alignItems']
+  justify?: React.CSSProperties['justifyContent']
   padding?: StackSpacing
   full?: boolean
   className?: string
@@ -16,6 +18,8 @@ export function Stack({
   children,
   direction = 'column',
   gap = 'none',
+  align,
+  justify,
   padding = 'none',
   full = false,
   className,
@@ -42,6 +46,8 @@ export function Stack({
         flex: full ? 1 : undefined,
         flexDirection: direction,
         gap: getSpacing(gap),
+        alignItems: align,
+        justifyContent: justify,
         padding: getSpacing(padding),
         ...style
       }}
