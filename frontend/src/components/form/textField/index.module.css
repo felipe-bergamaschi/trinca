@@ -28,13 +28,13 @@
 }
 
 .input:focus {
-  border-color: var(--bg-primary);
+  border-color: var(--color-primary);
   border-width: 2px;
   padding-left: 15px;
 }
 
 .input:focus+.label {
-  color: var(--bg-primary);
+  color: var(--color-primary);
 }
 
 .input:-webkit-autofill {

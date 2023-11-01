@@ -1,6 +1,6 @@
 .button {
   height: 48px;
-  background-color: var(--bg-primary);
+  background-color: var(--color-primary);
   color: white;
   padding: 0px var(--spacing-lg);
   border-radius: var(--radius-sm);
@@ -15,5 +15,5 @@
 }
 
 .button:hover {
-  background-color: var(--bg-primary-hover);
+  background-color: var(--color-primary-hover);
 }

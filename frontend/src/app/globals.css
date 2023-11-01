@@ -1,6 +1,9 @@
 :root {
-  --bg-primary: rgb(89, 99, 236);
-  --bg-primary-hover: rgb(89, 99, 236, 0.9);
+  --color-primary: rgb(89, 99, 236);
+  --color-primary-hover: rgb(89, 99, 236, 0.9);
+
+  --bg-primary: #fff;
+  --bg-secondary: #f6f8fc;
 
   --text-primary: rgba(0, 0, 0, 0.87);
   --text-secondary: rgba(0, 0, 0, 0.6);
