@@ -17,4 +17,5 @@
   background-color: var(--bg-primary);
   border-top-left-radius: 16px;
   overflow: hidden;
+  display: flex;
 }

@@ -7,16 +7,15 @@ interface CommonLayoutProps extends HeaderProps {
   children: React.ReactNode
 }
 
-export function CommonLayout({ children }: CommonLayoutProps) {
+export function CommonLayout({ children, ...props }: CommonLayoutProps) {
   return (
     <main className={styles.container}>
       <Sidebar />
 
       <div className={styles.content}>
-        <Header />
+        <Header actions={props.actions} />
 
         <div className={styles.body}>
-          Body
           {children}
         </div>
       </div>
