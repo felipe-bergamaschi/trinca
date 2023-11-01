@@ -1,8 +1,10 @@
 import { HomeIcon } from '../../assets/svg/home'
 import { LogoutIcon } from '../../assets/svg/logout'
 import { EventIcon } from '../../assets/svg/event'
+import { NotificationIcon } from '../../assets/svg/notification'
+import { SettingsIcon } from '../../assets/svg/settings'
 
-type IconName = 'home' | 'logout' | 'event';
+type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings';
 
 export interface IconProps {
   name: IconName;
@@ -19,6 +21,10 @@ export function Icon({ name, size = 24, color = '#000' }: IconProps) {
         return <LogoutIcon />
       case 'event':
         return <EventIcon />
+      case 'notification':
+        return <NotificationIcon />
+      case 'settings':
+        return <SettingsIcon />
     }
   }
 
