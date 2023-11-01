@@ -4,7 +4,7 @@ import styles from './index.module.css'
 import { Text } from "@/components/text";
 import { IconButton } from "@/components/iconButton";
 import { TextField } from "@/components/form/textField";
-import { EventDetails } from "../eventDetails";
+import { EventListDetails } from "../eventListDetails";
 
 export function EventList() {
   return (
@@ -30,7 +30,7 @@ export function EventList() {
 
       <Stack style={{ overflowY: 'auto' }} full>
         {Array.from({ length: 10 }).map((_, index) => (
-          <EventDetails />
+          <EventListDetails />
         ))}
       </Stack>
     </Stack>

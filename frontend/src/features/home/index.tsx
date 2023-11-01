@@ -2,17 +2,14 @@
 
 import { Stack } from '@/components/stack'
 import { EventList } from './eventList'
+import { EventDetails } from './eventDetails'
 
 export async function HomePage() {
   return (
     <Stack direction='row' full>
       <EventList />
 
-      <Stack full style={{ background: '#ccc' }}>
-        <div >detalhes</div>
-
-      </Stack>
-
+      <EventDetails />
     </Stack>
   )
 }
