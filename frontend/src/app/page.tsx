@@ -1,14 +1,14 @@
-import { AuthLayout } from '@/components/layout/auth'
+import { CommonLayout } from '@/components/layout/common'
 import { Login } from '@/features/login'
 import { MockLogin } from '@/features/login/mock'
 import { Suspense } from 'react'
 
 export default function Home() {
   return (
-    <AuthLayout>
-      <Suspense fallback={<MockLogin />}>
+    <CommonLayout>
+      {/* <Suspense fallback={<MockLogin />}>
         <Login />
-      </Suspense>
-    </AuthLayout>
+      </Suspense> */}
+    </CommonLayout>
   )
 }
