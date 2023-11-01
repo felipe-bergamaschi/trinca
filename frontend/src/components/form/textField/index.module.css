@@ -19,11 +19,11 @@
 
 .label {
   position: absolute;
-  top: -8px;
+  top: -9px;
   left: 14px;
   padding: 2px 4px;
   color: var(--text-secondary);
-  background-color: #fff;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 53%, rgba(255, 255, 255, 0) 47%);
   font-size: 12px;
 }
 

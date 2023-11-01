@@ -17,7 +17,7 @@ export async function Login() {
           priority
         />
 
-        <div>
+        <div className={styles.text}>
           <h1>
             Bem vindo de volta!
           </h1>
