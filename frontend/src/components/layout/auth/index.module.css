@@ -7,7 +7,7 @@
   display: flex;
   gap: var(--pd-md);
 
-  background-image: url('/background.jpg');
+  background-image: url('/background3.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
