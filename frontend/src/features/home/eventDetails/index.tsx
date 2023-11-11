@@ -1,23 +1,34 @@
 import { Stack } from "@/components/stack";
 import { Text } from "@/components/text";
 
-import styles from './index.module.css'
+import { TextField } from "@/components/form/textField";
+import { Container } from "@/components/container";
+import { Box } from "@/components/box";
 
 export function EventDetails() {
   return (
-    <Stack padding="md" full className={styles.container}>
-      <Stack gap="sm">
-        <Text size="lg">
-          Detalhes do churras
+    <Container
+      title="Novo Churras"
+      breadcrumb={['Novo Churras']}
+    >
+      <Box title="Preencha os dados">
+        <Stack direction="row" gap="md">
+          <TextField label="Data" name="asd" type="date" />
+
+          <TextField label="Endereço" name="asd" />
+
+          <TextField label="Descrição" name="asd" />
+        </Stack>
+
+        <Text>
+          Participantes do churras
         </Text>
 
-
-        <Stack direction="row" align="center" gap="sm">
-          <Text variant='h5' color="secondary">Churras{' > '}</Text>
-
-          <Text variant='h5' color="secondary">Nome do churras</Text>
+        <Stack direction="row" gap="md">
+          <TextField label="Nome" name="asd" />
+          <TextField label="Telefone" name="asd" />
         </Stack>
-      </Stack>
-    </Stack>
+      </Box>
+    </Container>
   )
 }
