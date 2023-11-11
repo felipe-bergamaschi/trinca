@@ -11,22 +11,24 @@ interface ContainerProps {
 
 export function Container({ title, breadcrumb, children }: ContainerProps) {
   return (
-    <Stack padding="md" full className={styles.container}>
-      <Stack gap="md">
-        <Stack gap="sm">
-          <Text size="lg">
-            {title}
-          </Text>
-
-          <Stack direction="row" align="center" gap="sm">
-            <Text variant='h5' color="secondary">
-              {['Churras', ...breadcrumb].join(' > ')}
+    <Stack align="center" full className={styles.container}>
+      <Stack full className={styles.content}>
+        <Stack padding="md" gap="md" full>
+          <Stack gap="sm">
+            <Text size="lg">
+              {title}
             </Text>
-          </Stack>
-        </Stack>
 
-        <Stack>
-          {children}
+            <Stack direction="row" align="center" gap="sm">
+              <Text variant='h5' color="secondary">
+                {['Churras', ...breadcrumb].join(' > ')}
+              </Text>
+            </Stack>
+          </Stack>
+
+          <Stack gap="md" full>
+            {children}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
