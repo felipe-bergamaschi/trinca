@@ -5,6 +5,7 @@ interface TextFieldProps {
   name: string;
   label: string;
   placeholder?: string;
+  value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,6 +14,7 @@ export function TextField({
   name,
   label,
   placeholder,
+  value,
   onChange,
 }: TextFieldProps) {
   return (
@@ -20,6 +22,7 @@ export function TextField({
       <input
         type={type}
         name={name}
+        value={value}
         id={name}
         className={styles.input}
         placeholder={placeholder}

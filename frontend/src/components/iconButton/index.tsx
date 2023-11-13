@@ -29,11 +29,14 @@ export function IconButton({ onClick, active, variant = 'md', ...props }: IconBu
 
   return (
     <button
+      type='button'
       onClick={onClick}
       className={`${styles.container} ${active ? styles.active : ''}`}
       style={{
         width: getSize(),
         height: getSize(),
+        minWidth: getSize(),
+        minHeight: getSize(),
         borderRadius: getRadius()
       }}
     >

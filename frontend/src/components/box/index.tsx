@@ -20,7 +20,7 @@ export function Box({ title, children }: BoxProps) {
       </Stack>
 
       <Stack padding="md" justify="end" direction="row" gap="md" className={styles.footer}>
-        <Button>
+        <Button type="submit">
           Confirmar
         </Button>
       </Stack>
