@@ -1,6 +1,5 @@
 globalThis.KITA_PROJECT_ROOT = __dirname;
 
-import '@prisma/client';
 import 'source-map-support/register';
 
 import { isMainThread } from 'worker_threads';

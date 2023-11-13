@@ -1,11 +1,9 @@
-export * from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
+
 import { Env } from '../util/env';
 import { Log } from '../logger';
 
-export let PRISMA: PrismaClient;
-
-const prisma = new PrismaClient({
+export const PRISMA = new PrismaClient({
   datasources: { db: { url: Env.DATABASE_URL } },
   errorFormat: 'minimal',
   log: [
@@ -18,9 +16,7 @@ const prisma = new PrismaClient({
 const log = Log.child({ name: 'prisma' });
 
 if (process.env.NODE_ENV !== 'test') {
-  prisma.$on('info', (message) => log.info(message));
-  prisma.$on('warn', (message) => log.warn(message));
-  prisma.$on('error', (message) => log.error(message));
+  PRISMA.$on('info', (message) => log.info(message));
+  PRISMA.$on('warn', (message) => log.warn(message));
+  PRISMA.$on('error', (message) => log.error(message));
 }
-
-PRISMA = prisma;

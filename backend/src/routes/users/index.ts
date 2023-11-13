@@ -1,4 +1,5 @@
 import { Body } from "@kitajs/runtime";
+import { PRISMA } from "../../db/client";
 
 interface CreateUser {
   /**
@@ -9,15 +10,14 @@ interface CreateUser {
 }
 
 /**
- * @tag Test
- * @operationId test
+ * @tag User
+ * @operationId createUser
  */
 export async function post(body: Body<CreateUser>) {
-  // ...rest
-
-  return {
-    status: 200,
-    message: 'ok'
-  };
+  return PRISMA.user.create({
+    data: {
+      name: body.name
+    }
+  });
 }
 
