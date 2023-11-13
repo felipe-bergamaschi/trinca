@@ -54,6 +54,30 @@
           "createdAt"
         ],
         "type": "object"
+      },
+      "GetUsersIndexResponse": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "id": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "createdAt"
+          ],
+          "type": "object"
+        },
+        "type": "array"
       }
     }
   },
@@ -92,6 +116,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateUserResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getUsersIndex",
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersIndexResponse"
                 }
               }
             }

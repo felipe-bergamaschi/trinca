@@ -21,3 +21,6 @@ export async function post(body: Body<CreateUser>) {
   });
 }
 
+export async function get() {
+  return PRISMA.user.findMany();
+}
