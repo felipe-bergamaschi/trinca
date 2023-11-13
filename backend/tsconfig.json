@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "skipLibCheck": true,
+    "jsx": "react",
+    "jsxFactory": "Html.createElement",
+    "jsxFragmentFactory": "Html.Fragment",
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "@kitajs/ts-html-plugin"
+      },
+      {
+        "name": "@kitajs/ts-plugin"
+      }
+    ]
+  },
+  "include": [
+    "src"
+  ]
+}
