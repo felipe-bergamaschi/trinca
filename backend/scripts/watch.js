@@ -54,6 +54,13 @@ const DEFAULTS = {
       ignore: undefined,
       exec: 'pnpm --filter @fdm/frontend orval',
       cwd: process.cwd()
+    },
+    {
+      watch: './swagger.json',
+      debounce: 1000,
+      ignore: undefined,
+      exec: 'pnpm --filter @fdm/link orval',
+      cwd: process.cwd()
     }
   ]
 };
