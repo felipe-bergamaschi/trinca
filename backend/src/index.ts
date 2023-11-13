@@ -1,11 +1,10 @@
 globalThis.KITA_PROJECT_ROOT = __dirname;
 
-// import 'prisma-client';
+import '@prisma/client';
 import 'source-map-support/register';
 
-// import Sentry from '@sentry/node';
 import { isMainThread } from 'worker_threads';
-// import { PRISMA } from './db/client';
+import { PRISMA } from './db/client';
 import { Log } from './logger';
 import { Env } from './util/env';
 import { updateSwagger } from './util/swagger';
@@ -87,16 +86,14 @@ const closeListeners = closeWithGrace({ delay: 500 }, async function ({ err }) {
 app.addHook('onClose', async () => {
   closeListeners.uninstall();
 
-  // PRISMA.$disconnect();
-  // app.Sentry?.close();
+  PRISMA.$disconnect();
 });
 
-// app.addHook('onListen', async () => {
-//   PRISMA.$connect();
-//   app.log.info('Connected to prisma');
-// });
+app.addHook('onListen', async () => {
+  PRISMA.$connect();
+  app.log.info('Connected to prisma');
+});
 
-// Start listening.
 app.listen({ port: Env.PORT, host: Env.HOST }, async (err) => {
   if (err) {
     app.log.error(err);
