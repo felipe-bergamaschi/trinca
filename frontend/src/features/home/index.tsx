@@ -4,7 +4,7 @@ import { Stack } from '@/components/stack'
 import { EventList } from './eventList'
 import { EventDetails } from './eventDetails'
 
-export async function HomePage() {
+export function HomePage() {
   return (
     <Stack direction='row' full>
       <EventList />

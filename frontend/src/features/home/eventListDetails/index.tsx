@@ -6,28 +6,36 @@ import styles from './index.module.css'
 import { ListBarbecueResponseItem } from "@/query";
 import { formatCurrencyToReal } from "@/utils/formatCurrency";
 import Decimal from "decimal.js";
+import { format } from 'timeago.js';
+import { getDate } from "@/utils/date";
 
 interface EventListDetailsProps {
   data: ListBarbecueResponseItem
 }
 
 export function EventListDetails({ data }: EventListDetailsProps) {
+  const date = getDate(data.date)
+
   const sumTotal = data.attendees.reduce((acc, attendee) => {
     return new Decimal(acc).add(attendee.fee).toNumber()
   }, 0)
 
   return (
     <Stack padding="md" gap="sm" className={styles.container}>
-      <Text size="sm" color="secondary">Em 10 dias</Text>
+      <Text size="sm" color="secondary">{format(date, 'pt_BR')}</Text>
 
       <Stack direction="row" gap="md">
         <Stack align="center" gap="sm">
-          <Text variant="h1">10</Text>
+          <Text variant="h1">
+            {date.getDate()}
+          </Text>
 
-          <Text color="secondary">Seg</Text>
+          <Text color="secondary">
+            {date.toLocaleString('pt-BR', { weekday: 'short' })}
+          </Text>
         </Stack>
 
-        <Stack gap="sm">
+        <Stack gap="sm" full>
           <Text variant="h3">
             {data.description}
           </Text>
