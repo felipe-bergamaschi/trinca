@@ -11,27 +11,49 @@ import { Formik } from "formik";
 import { Button } from "@/components/button";
 import { IconButton } from "@/components/iconButton";
 import { useState } from "react";
+import { formatCurrencyOnInput, formatCurrencyToSubmit } from "@/utils/formatCurrency";
+import toast from "react-hot-toast";
+import { z } from "zod";
+import { useCreateBarbecue } from "@/query";
 
 interface FormValues {
   date: string;
   address: string;
   description: string;
-  people: {
-    id: number
+  attendees: {
     name: string;
-    amount: string;
+    fee: string;
   }[];
 }
 
-export function EventDetails() {
-  const [people, setPeople] = useState<FormValues['people']>([])
+interface EventDetailsProps {
+  refetch: () => void;
+}
 
-  function addPeople() {
-    setPeople([...people, { name: '', amount: '', id: Math.random() }])
+export function EventDetails({ refetch }: EventDetailsProps) {
+  const { mutateAsync } = useCreateBarbecue()
+
+  const [attendees, setAttendees] = useState<FormValues['attendees']>([])
+  const [formKey, setFormKey] = useState(Math.random())
+
+  function addAttendees() {
+    setAttendees([...attendees, { name: '', fee: '' }])
   }
 
-  function removePeople(id: number) {
-    setPeople(people.filter((item) => item.id !== id))
+  async function handleSubmit(values: FormValues) {
+    try {
+      const validated = schema.parse(values)
+
+      await mutateAsync({
+        data: validated
+      })
+
+      refetch()
+
+      toast.success('Churras criado com sucesso! 123')
+    } catch (error) {
+      toast.error('Preencha todos os campos corretamente!')
+    }
   }
 
   return (
@@ -41,31 +63,29 @@ export function EventDetails() {
     >
       <Formik
         initialValues={{} as FormValues}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log({ values })
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 400);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          handleSubmit(values);
+
+          setSubmitting(false);
+          resetForm();
+          setAttendees([])
+          setFormKey(Math.random())
         }}
       >
         {({
           handleSubmit,
           values,
-          // errors,
-          // touched,
           handleChange,
-          // handleBlur,
-          // isSubmitting,
+          isSubmitting,
+          setValues
         }) => (
-          <form onSubmit={handleSubmit}>
-            <Box title="Preencha os dados">
+          <form onSubmit={handleSubmit} key={formKey}>
+            <Box title="Preencha os dados" buttonDisabled={isSubmitting}>
               <Stack direction="row" gap="md">
                 <TextField
-                  label="Data"
-                  name="date"
-                  type="date"
-                  value={values.date}
+                  label="Nome do churras"
+                  name="description"
+                  value={values.description}
                   onChange={handleChange}
                 />
 
@@ -77,9 +97,10 @@ export function EventDetails() {
                 />
 
                 <TextField
-                  label="Descrição"
-                  name="description"
-                  value={values.description}
+                  label="Data"
+                  name="date"
+                  type="date"
+                  value={values.date}
                   onChange={handleChange}
                 />
               </Stack>
@@ -88,29 +109,47 @@ export function EventDetails() {
                 Participantes do churras
               </Text>
 
-              <Button onClick={addPeople}>
+              <Button onClick={addAttendees}>
                 Novo participante
               </Button>
 
-              {people.map((item, index) => (
-                <Stack direction="row" gap="md" key={item.id}>
+              {attendees.map((_, index) => (
+                <Stack direction="row" gap="md" key={index}>
                   <TextField
                     label="Nome"
-                    name={`people[${index}].name`}
-                    value={values.people?.[index]?.name}
+                    name={`attendees[${index}].name`}
+                    value={values.attendees?.[index]?.name}
                     onChange={handleChange}
                   />
 
                   <TextField
                     label="Valor"
-                    name={`people[${index}].amount`}
-                    value={values.people?.[index]?.amount}
-                    onChange={handleChange}
+                    name={`attendees[${index}].fee`}
+                    value={values.attendees?.[index]?.fee}
+                    onChange={(e) => {
+                      const value = formatCurrencyOnInput(e.target.value)
+
+                      handleChange({
+                        target: {
+                          name: `attendees[${index}].fee`,
+                          value,
+                        }
+                      })
+                    }}
                   />
 
                   <IconButton
                     name="delete"
-                    onClick={() => removePeople(item.id)}
+                    onClick={() => {
+                      const filterData = values.attendees.filter((_, i) => i !== index)
+
+                      setValues({
+                        ...values,
+                        attendees: filterData
+                      })
+
+                      setAttendees(filterData)
+                    }}
                   />
                 </Stack>
               ))}
@@ -122,3 +161,22 @@ export function EventDetails() {
     </Container>
   )
 }
+
+const schema = z.object({
+  date: z.string(),
+  address: z.string(),
+  description: z.string(),
+  attendees: z.array(z.object({
+    name: z.string(),
+    fee: z.string(),
+  }))
+}).transform((data) => {
+  return {
+    ...data,
+    date: new Date(data.date).toISOString(),
+    attendees: data.attendees.map((attendee) => ({
+      ...attendee,
+      fee: formatCurrencyToSubmit(attendee.fee)
+    }))
+  }
+})

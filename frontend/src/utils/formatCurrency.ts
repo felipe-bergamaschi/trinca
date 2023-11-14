@@ -23,3 +23,13 @@ export function formatCurrencyOnInput(value: string) {
 
   return formatCurrencyToReal(formattedValue)
 }
+
+export function formatCurrencyToSubmit(value: string) {
+  const sanitizeValue = value
+    .replace(/[R$\s.]/g, '')
+    .replace(',', '.');
+
+  const decimalValue = new Decimal(sanitizeValue);
+
+  return decimalValue.toDecimalPlaces(2, Decimal.ROUND_DOWN).toNumber();
+}

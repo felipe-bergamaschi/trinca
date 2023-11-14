@@ -7,11 +7,14 @@ import { Text } from "@/components/text";
 import { IconButton } from "@/components/iconButton";
 import { TextField } from "@/components/form/textField";
 import { EventListDetails } from "../eventListDetails";
-import { useListBarbecue } from "@/query";
+import { ListBarbecueResponse } from "@/query";
 
-export function EventList() {
-  const { data, isLoading } = useListBarbecue()
+interface EventListProps {
+  data: ListBarbecueResponse | undefined;
+  isLoading: boolean;
+}
 
+export function EventList({ data, isLoading }: EventListProps) {
   return (
     <Stack className={styles.container}>
       <Stack padding="sm" direction="row" align="center" justify="space-between">

@@ -3,13 +3,21 @@
 import { Stack } from '@/components/stack'
 import { EventList } from './eventList'
 import { EventDetails } from './eventDetails'
+import { useListBarbecue } from '@/query'
 
 export function HomePage() {
+  const { data, isLoading, refetch } = useListBarbecue()
+
   return (
     <Stack direction='row' full>
-      <EventList />
+      <EventList
+        data={data}
+        isLoading={isLoading}
+      />
 
-      <EventDetails />
+      <EventDetails
+        refetch={refetch}
+      />
     </Stack>
   )
 }
