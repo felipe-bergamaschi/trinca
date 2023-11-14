@@ -29,7 +29,7 @@ module.exports = {
     },
 
     input: {
-      target: require.resolve('../backend/swagger.json')
+      target: require.resolve('./swagger.json')
     }
   }
 };
