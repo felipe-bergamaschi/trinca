@@ -18,7 +18,8 @@
     "orval": "^6.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
