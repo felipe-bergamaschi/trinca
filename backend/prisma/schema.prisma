@@ -15,3 +15,20 @@ model User {
   name      String
   createdAt DateTime @default(now())
 }
+
+model Barbecue {
+  id          Int         @id @default(autoincrement())
+  date        DateTime
+  address     String
+  description String
+  attendees   Attendees[]
+  createdAt   DateTime    @default(now())
+}
+
+model Attendees {
+  id         Int       @id @default(autoincrement())
+  name       String
+  fee        Float
+  Barbecue   Barbecue? @relation(fields: [barbecueId], references: [id])
+  barbecueId Int?
+}
