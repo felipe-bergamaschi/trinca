@@ -34,6 +34,36 @@
         ],
         "type": "object"
       },
+      "CreateBarbecueResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "address",
+          "description",
+          "createdAt"
+        ],
+        "type": "object"
+      },
       "CreateUserResponse": {
         "additionalProperties": false,
         "properties": {
@@ -82,6 +112,82 @@
     }
   },
   "paths": {
+    "/barbecue/create": {
+      "post": {
+        "operationId": "createBarbecue",
+        "tags": [
+          "Barbecue"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "address": {
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "type": "string"
+                  },
+                  "attendees": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "fee": {
+                          "maxLength": 100,
+                          "minLength": 3,
+                          "type": "number"
+                        },
+                        "name": {
+                          "maxLength": 100,
+                          "minLength": 3,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "fee"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "date": {
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "description": {
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "date",
+                  "address",
+                  "description",
+                  "attendees"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBarbecueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "operationId": "createUser",
