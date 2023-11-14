@@ -64,6 +64,50 @@
         ],
         "type": "object"
       },
+      "ListBarbecueResponse": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "attendees": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "fee": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "fee"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "date": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "id",
+            "date",
+            "address",
+            "description",
+            "attendees"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
       "CreateUserResponse": {
         "additionalProperties": false,
         "properties": {
@@ -181,6 +225,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateBarbecueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/barbecue/list": {
+      "get": {
+        "operationId": "listBarbecue",
+        "tags": [
+          "Barbecue"
+        ],
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBarbecueResponse"
                 }
               }
             }
