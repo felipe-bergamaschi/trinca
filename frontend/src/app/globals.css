@@ -2,6 +2,7 @@
   --color-primary: rgb(89, 99, 236);
   --color-primary-hover: rgb(89, 99, 236, 0.1);
   --color-primary-hover-70: rgb(89, 99, 236, 0.7);
+  --color-primary-disabled: rgb(89, 99, 236, 0.3);
 
   --bg-primary: #fff;
   --bg-secondary: #f6f8fc;

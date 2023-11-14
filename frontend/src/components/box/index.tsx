@@ -6,9 +6,10 @@ import styles from './index.module.css'
 interface BoxProps {
   title: string
   children: React.ReactNode
+  buttonDisabled?: boolean
 }
 
-export function Box({ title, children }: BoxProps) {
+export function Box({ title, children, buttonDisabled }: BoxProps) {
   return (
     <Stack className={styles.container}>
       <Stack padding="md">
@@ -20,7 +21,7 @@ export function Box({ title, children }: BoxProps) {
       </Stack>
 
       <Stack padding="md" justify="end" direction="row" gap="md" className={styles.footer}>
-        <Button type="submit">
+        <Button type="submit" disabled={buttonDisabled}>
           Confirmar
         </Button>
       </Stack>

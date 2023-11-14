@@ -17,3 +17,8 @@
 .button:hover {
   background-color: var(--color-primary-hover-70);
 }
+
+.button:disabled {
+  background-color: var(--color-primary-disabled);
+  cursor: not-allowed;
+}
