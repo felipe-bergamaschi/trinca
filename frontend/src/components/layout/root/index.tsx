@@ -1,4 +1,9 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MainContext } from "@/contexts/main"
+
+const queryClient = new QueryClient()
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -6,8 +11,10 @@ interface RootLayoutProps {
 
 export function RootLayout({ children }: RootLayoutProps) {
   return (
-    <MainContext>
-      {children}
-    </MainContext>
+    <QueryClientProvider client={queryClient}>
+      <MainContext>
+        {children}
+      </MainContext>
+    </QueryClientProvider>
   )
 }
