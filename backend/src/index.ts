@@ -8,6 +8,7 @@ import { Log } from './logger';
 import { Env } from './util/env';
 import { updateSwagger } from './util/swagger';
 import fastify from 'fastify';
+import fastifyCors from '@fastify/cors';
 import { ajvFilePlugin } from '@fastify/multipart';
 import { Kita } from '@kitajs/runtime';
 
@@ -35,6 +36,11 @@ const app = fastify({
       strictNumbers: 'log'
     }
   }
+});
+
+app.register(fastifyCors, {
+  prefix: Env.BASE_PATH,
+  origin: 'http://localhost:3000'
 });
 
 app.register(Kita, {
