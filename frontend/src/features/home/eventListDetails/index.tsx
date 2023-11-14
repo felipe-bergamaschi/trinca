@@ -3,8 +3,19 @@ import { Stack } from "@/components/stack";
 import { Text } from "@/components/text";
 
 import styles from './index.module.css'
+import { ListBarbecueResponseItem } from "@/query";
+import { formatCurrencyToReal } from "@/utils/formatCurrency";
+import Decimal from "decimal.js";
 
-export function EventListDetails() {
+interface EventListDetailsProps {
+  data: ListBarbecueResponseItem
+}
+
+export function EventListDetails({ data }: EventListDetailsProps) {
+  const sumTotal = data.attendees.reduce((acc, attendee) => {
+    return new Decimal(acc).add(attendee.fee).toNumber()
+  }, 0)
+
   return (
     <Stack padding="md" gap="sm" className={styles.container}>
       <Text size="sm" color="secondary">Em 10 dias</Text>
@@ -17,25 +28,33 @@ export function EventListDetails() {
         </Stack>
 
         <Stack gap="sm">
-          <Text variant="h3">Nome do evento</Text>
+          <Text variant="h3">
+            {data.description}
+          </Text>
 
           <Stack direction="row" gap="sm">
             <Icon name="place" color="var(--text-secondary)" />
 
-            <Text color="secondary" variant="h5">Endereço do churrasco bem aqui</Text>
+            <Text color="secondary" variant="h5">
+              {data.address}
+            </Text>
           </Stack>
 
-          <Stack direction="row" justify="space-between">
+          <Stack direction="row" justify="space-between" full>
             <Stack direction="row" gap="sm" align="center">
               <Icon name="group" color="var(--text-secondary)" />
 
-              <Text color="secondary">12</Text>
+              <Text color="secondary">
+                {data.attendees.length}
+              </Text>
             </Stack>
 
             <Stack direction="row" gap="sm" align="center">
               <Icon name="paid" color="var(--text-secondary)" />
 
-              <Text color="secondary">R$ 100,00</Text>
+              <Text color="secondary">
+                {formatCurrencyToReal(sumTotal)}
+              </Text>
             </Stack>
           </Stack>
         </Stack>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Stack } from "@/components/stack";
 
 import styles from './index.module.css'
@@ -5,8 +7,11 @@ import { Text } from "@/components/text";
 import { IconButton } from "@/components/iconButton";
 import { TextField } from "@/components/form/textField";
 import { EventListDetails } from "../eventListDetails";
+import { useListBarbecue } from "@/query";
 
 export function EventList() {
+  const { data, isLoading } = useListBarbecue()
+
   return (
     <Stack className={styles.container}>
       <Stack padding="sm" direction="row" align="center" justify="space-between">
@@ -29,9 +34,20 @@ export function EventList() {
       </Stack>
 
       <Stack style={{ overflowY: 'auto' }} full>
-        {Array.from({ length: 10 }).map((_, index) => (
-          <EventListDetails />
+        {!isLoading && data?.map((barbecue) => (
+          <EventListDetails
+            key={barbecue.id}
+            data={barbecue}
+          />
         ))}
+
+        {isLoading && (
+          <Stack align="center" justify="center" full>
+            <Text>
+              Carregando...
+            </Text>
+          </Stack>
+        )}
       </Stack>
     </Stack>
   )
