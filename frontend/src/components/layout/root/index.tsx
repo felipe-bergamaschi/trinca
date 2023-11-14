@@ -3,6 +3,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MainContext } from "@/contexts/main"
 
+import { register } from 'timeago.js';
+import pt_BR from 'timeago.js/lib/lang/pt_BR';
+
+register('pt_BR', pt_BR);
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
