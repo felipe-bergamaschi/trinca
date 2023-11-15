@@ -12,6 +12,7 @@ interface StackProps {
   full?: boolean
   className?: string
   style?: React.CSSProperties
+  onClick?: () => void
 }
 
 export function Stack({
@@ -23,7 +24,8 @@ export function Stack({
   padding = 'none',
   full = false,
   className,
-  style
+  style,
+  onClick
 }: StackProps) {
   function getSpacing(value: StackSpacing) {
     switch (value) {
@@ -51,6 +53,7 @@ export function Stack({
         padding: getSpacing(padding),
         ...style
       }}
+      onClick={onClick}
     >
       {children}
     </div>

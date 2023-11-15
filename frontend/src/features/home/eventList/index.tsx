@@ -10,9 +10,10 @@ import { ListBarbecueResponse } from "@/query";
 interface EventListProps {
   data: ListBarbecueResponse | undefined;
   isLoading: boolean;
+  onClick: (id: number) => void;
 }
 
-export function EventList({ data, isLoading }: EventListProps) {
+export function EventList({ data, isLoading, onClick }: EventListProps) {
   return (
     <Stack className={styles.container}>
       <Stack padding="sm" direction="row" align="center" justify="space-between">
@@ -39,6 +40,7 @@ export function EventList({ data, isLoading }: EventListProps) {
           <EventListDetails
             key={barbecue.id}
             data={barbecue}
+            onClick={() => onClick(barbecue.id)}
           />
         ))}
 

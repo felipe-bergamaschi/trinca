@@ -10,10 +10,11 @@ import { format } from 'timeago.js';
 import { getDate } from "@/utils/date";
 
 interface EventListDetailsProps {
-  data: ListBarbecueResponseItem
+  data: ListBarbecueResponseItem;
+  onClick: () => void;
 }
 
-export function EventListDetails({ data }: EventListDetailsProps) {
+export function EventListDetails({ data, onClick }: EventListDetailsProps) {
   const date = getDate(data.date)
 
   const sumTotal = data.attendees.reduce((acc, attendee) => {
@@ -21,7 +22,12 @@ export function EventListDetails({ data }: EventListDetailsProps) {
   }, 0)
 
   return (
-    <Stack padding="md" gap="sm" className={styles.container}>
+    <Stack
+      padding="md"
+      gap="sm"
+      className={styles.container}
+      onClick={onClick}
+    >
       <Text size="sm" color="secondary">{format(date, 'pt_BR')}</Text>
 
       <Stack direction="row" gap="md">
