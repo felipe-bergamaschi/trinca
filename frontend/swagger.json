@@ -108,6 +108,50 @@
         },
         "type": "array"
       },
+      "SearchBarbecueResponse": {
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "attendees": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "fee": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "fee"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "date": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "id",
+            "date",
+            "address",
+            "description",
+            "attendees"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
       "DeleteBarbecueResponse": {
         "additionalProperties": false,
         "properties": {
@@ -333,6 +377,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListBarbecueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/barbecue/search": {
+      "post": {
+        "operationId": "searchBarbecue",
+        "tags": [
+          "Barbecue"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "search": {
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "search"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchBarbecueResponse"
                 }
               }
             }

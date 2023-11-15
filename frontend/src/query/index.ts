@@ -21,6 +21,10 @@ export type DeleteBarbecueBody = {
   id: number;
 };
 
+export type SearchBarbecueBody = {
+  search: string;
+};
+
 export type CreateBarbecueBodyAttendeesItem = {
   fee: number;
   name: string;
@@ -70,6 +74,20 @@ export interface DeleteBarbecueResponse {
   description: string;
   id: number;
 }
+
+export type SearchBarbecueResponseItemAttendeesItem = {
+  fee: number;
+};
+
+export type SearchBarbecueResponseItem = {
+  address: string;
+  attendees: SearchBarbecueResponseItemAttendeesItem[];
+  date: string;
+  description: string;
+  id: number;
+};
+
+export type SearchBarbecueResponse = SearchBarbecueResponseItem[];
 
 export type ListBarbecueResponseItemAttendeesItem = {
   fee: number;
@@ -207,6 +225,55 @@ export const useListBarbecue = <TData = Awaited<ReturnType<typeof listBarbecue>>
 
 
 
+export const searchBarbecue = (
+    searchBarbecueBody: SearchBarbecueBody,
+ ) => {
+      
+      
+      return request<SearchBarbecueResponse>(
+      {url: `/barbecue/search`, method: 'post',
+      headers: {'Content-Type': 'application/json', },
+      data: searchBarbecueBody
+    },
+      );
+    }
+  
+
+
+export const getSearchBarbecueMutationOptions = <TError = ErrorType<unknown>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof searchBarbecue>>, TError,{data: SearchBarbecueBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof searchBarbecue>>, TError,{data: SearchBarbecueBody}, TContext> => {
+ const {mutation: mutationOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof searchBarbecue>>, {data: SearchBarbecueBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  searchBarbecue(data,)
+        }
+
+        
+
+
+   return  { mutationFn, ...mutationOptions }}
+
+    export type SearchBarbecueMutationResult = NonNullable<Awaited<ReturnType<typeof searchBarbecue>>>
+    export type SearchBarbecueMutationBody = SearchBarbecueBody
+    export type SearchBarbecueMutationError = ErrorType<unknown>
+
+    export const useSearchBarbecue = <TError = ErrorType<unknown>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof searchBarbecue>>, TError,{data: SearchBarbecueBody}, TContext>, }
+) => {
+
+      const mutationOptions = getSearchBarbecueMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    
 export const deleteBarbecue = (
     id: string,
     deleteBarbecueBody: DeleteBarbecueBody,
