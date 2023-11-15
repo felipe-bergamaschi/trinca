@@ -18,6 +18,7 @@ export function HomePage() {
         data={data}
         isLoading={isLoading}
         onClick={(id) => setBarbecueDetails(id)}
+        onAddBarbecue={() => setBarbecueDetails(null)}
       />
 
       {barbecueDetails ? (

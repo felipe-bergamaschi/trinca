@@ -11,9 +11,10 @@ interface EventListProps {
   data: ListBarbecueResponse | undefined;
   isLoading: boolean;
   onClick: (id: number) => void;
+  onAddBarbecue: () => void;
 }
 
-export function EventList({ data, isLoading, onClick }: EventListProps) {
+export function EventList({ data, isLoading, onClick, onAddBarbecue }: EventListProps) {
   return (
     <Stack className={styles.container}>
       <Stack padding="sm" direction="row" align="center" justify="space-between">
@@ -24,6 +25,7 @@ export function EventList({ data, isLoading, onClick }: EventListProps) {
         <IconButton
           name="add"
           variant="sm"
+          onClick={onAddBarbecue}
         />
       </Stack>
 
