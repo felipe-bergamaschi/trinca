@@ -64,7 +64,7 @@ export function EventDetails({ refetch }: EventDetailsProps) {
 
       refetch()
 
-      toast.success('Churras criado com sucesso! 123')
+      toast.success('Churras criado com sucesso!')
     } catch (error) {
       let message = 'Erro ao criar churras'
 
