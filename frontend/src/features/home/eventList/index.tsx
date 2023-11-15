@@ -6,15 +6,26 @@ import { IconButton } from "@/components/iconButton";
 import { TextField } from "@/components/form/textField";
 import { EventListDetails } from "../eventListDetails";
 import { ListBarbecueResponse } from "@/query";
+import { useState } from "react";
+import debounce from "debounce";
 
 interface EventListProps {
   data: ListBarbecueResponse | undefined;
   isLoading: boolean;
   onClick: (id: number) => void;
   onAddBarbecue: () => void;
+  handleSearch: (value: string) => void;
 }
 
-export function EventList({ data, isLoading, onClick, onAddBarbecue }: EventListProps) {
+export function EventList({ data, isLoading, onClick, onAddBarbecue, handleSearch }: EventListProps) {
+  const debouncedSearch = debounce((value: string) => {
+    handleSearch(value)
+  }, 500)
+
+  function handleChange(value: string) {
+    debouncedSearch(value)
+  }
+
   return (
     <Stack className={styles.container}>
       <Stack padding="sm" direction="row" align="center" justify="space-between">
@@ -34,6 +45,8 @@ export function EventList({ data, isLoading, onClick, onAddBarbecue }: EventList
           label="Pesquisar"
           name="search"
           placeholder="Pesquise por um churras..."
+          // value={search}
+          onChange={(e) => handleChange(e.target.value)}
         />
       </Stack>
 
@@ -45,6 +58,14 @@ export function EventList({ data, isLoading, onClick, onAddBarbecue }: EventList
             onClick={() => onClick(barbecue.id)}
           />
         ))}
+
+        {data?.length === 0 && (
+          <Stack align="center" justify="center">
+            <Text>
+              Nenhum churras encontrado {':('}
+            </Text>
+          </Stack>
+        )}
 
         {isLoading && (
           <Stack align="center" justify="center" full>

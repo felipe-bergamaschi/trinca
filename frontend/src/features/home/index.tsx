@@ -3,14 +3,32 @@
 import { Stack } from '@/components/stack'
 import { EventList } from './eventList'
 import { EventDetails } from './eventDetails'
-import { useListBarbecue } from '@/query'
+import { useListBarbecue, useSearchBarbecue } from '@/query'
 import { useState } from 'react'
 import { BarbecueDetails } from './barbecueDetails'
 
 export function HomePage() {
-  const { data, isLoading, refetch } = useListBarbecue()
+  const { data: listBarbecue, isLoading, refetch } = useListBarbecue()
+  const { data: searchData, mutateAsync } = useSearchBarbecue()
 
   const [barbecueDetails, setBarbecueDetails] = useState<number | null>(null)
+  const [search, setSearch] = useState<string | null>(null)
+
+  const data = search ? searchData : listBarbecue
+
+  function handleSearch(value: string) {
+    if (!value || value.length <= 2 || value.length > 100) {
+      setSearch(null)
+      return
+    }
+
+    setSearch(value)
+    mutateAsync({
+      data: {
+        search: value
+      }
+    })
+  }
 
   return (
     <Stack direction='row' full>
@@ -19,6 +37,7 @@ export function HomePage() {
         isLoading={isLoading}
         onClick={(id) => setBarbecueDetails(id)}
         onAddBarbecue={() => setBarbecueDetails(null)}
+        handleSearch={handleSearch}
       />
 
       {barbecueDetails ? (
