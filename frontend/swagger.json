@@ -108,6 +108,36 @@
         },
         "type": "array"
       },
+      "DeleteBarbecueResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "address",
+          "description",
+          "createdAt"
+        ],
+        "type": "object"
+      },
       "ListBarbecueByIdResponse": {
         "additionalProperties": false,
         "properties": {
@@ -303,6 +333,55 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListBarbecueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/barbecue/{id}/delete": {
+      "post": {
+        "operationId": "deleteBarbecue",
+        "tags": [
+          "Barbecue"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBarbecueResponse"
                 }
               }
             }

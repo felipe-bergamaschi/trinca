@@ -17,6 +17,10 @@ export type CreateUserBody = {
   name: string;
 };
 
+export type DeleteBarbecueBody = {
+  id: number;
+};
+
 export type CreateBarbecueBodyAttendeesItem = {
   fee: number;
   name: string;
@@ -53,6 +57,14 @@ export type ListBarbecueByIdResponseAttendeesItem = {
 export interface ListBarbecueByIdResponse {
   address: string;
   attendees: ListBarbecueByIdResponseAttendeesItem[];
+  createdAt: string;
+  date: string;
+  description: string;
+  id: number;
+}
+
+export interface DeleteBarbecueResponse {
+  address: string;
   createdAt: string;
   date: string;
   description: string;
@@ -195,6 +207,56 @@ export const useListBarbecue = <TData = Awaited<ReturnType<typeof listBarbecue>>
 
 
 
+export const deleteBarbecue = (
+    id: string,
+    deleteBarbecueBody: DeleteBarbecueBody,
+ ) => {
+      
+      
+      return request<DeleteBarbecueResponse>(
+      {url: `/barbecue/${id}/delete`, method: 'post',
+      headers: {'Content-Type': 'application/json', },
+      data: deleteBarbecueBody
+    },
+      );
+    }
+  
+
+
+export const getDeleteBarbecueMutationOptions = <TError = ErrorType<unknown>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBarbecue>>, TError,{id: string;data: DeleteBarbecueBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteBarbecue>>, TError,{id: string;data: DeleteBarbecueBody}, TContext> => {
+ const {mutation: mutationOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteBarbecue>>, {id: string;data: DeleteBarbecueBody}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  deleteBarbecue(id,data,)
+        }
+
+        
+
+
+   return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteBarbecueMutationResult = NonNullable<Awaited<ReturnType<typeof deleteBarbecue>>>
+    export type DeleteBarbecueMutationBody = DeleteBarbecueBody
+    export type DeleteBarbecueMutationError = ErrorType<unknown>
+
+    export const useDeleteBarbecue = <TError = ErrorType<unknown>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteBarbecue>>, TError,{id: string;data: DeleteBarbecueBody}, TContext>, }
+) => {
+
+      const mutationOptions = getDeleteBarbecueMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    
 export const listBarbecueById = (
     id: number,
  signal?: AbortSignal
