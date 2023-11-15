@@ -8,8 +8,9 @@ import { GroupIcon } from '../../assets/svg/group'
 import { PaidIcon } from '../../assets/svg/paid'
 import { PlaceIcon } from '../../assets/svg/place'
 import { DeleteIcon } from '../../assets/svg/delete'
+import { InfoIcon } from '../../assets/svg/info'
 
-type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add' | 'group' | 'paid' | 'place' | 'delete';
+type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add' | 'group' | 'paid' | 'place' | 'delete' | 'info';
 
 export interface IconProps {
   name: IconName;
@@ -40,6 +41,8 @@ export function Icon({ name, size = 24, color = '#000' }: IconProps) {
         return <PlaceIcon />
       case 'delete':
         return <DeleteIcon />
+      case 'info':
+        return <InfoIcon />
     }
   }
 
