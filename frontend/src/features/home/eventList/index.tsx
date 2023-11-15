@@ -60,7 +60,7 @@ export function EventList({ data, isLoading, onClick, onAddBarbecue, handleSearc
         ))}
 
         {data?.length === 0 && (
-          <Stack align="center" justify="center">
+          <Stack align="center" justify="center" full>
             <Text>
               Nenhum churras encontrado {':('}
             </Text>
