@@ -1,9 +1,7 @@
 export function getDate(date: string) {
   const dateUTC = new Date(date);
 
-  const offsetMin = new Date().getTimezoneOffset();
+  dateUTC.setTime(dateUTC.getTime() + dateUTC.getTimezoneOffset() * 60000)
 
-  const offsetMili = offsetMin * 60 * 1000;
-
-  return new Date(dateUTC.getTime() - offsetMili);
+  return dateUTC;
 }
