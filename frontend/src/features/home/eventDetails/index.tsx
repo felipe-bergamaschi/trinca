@@ -52,7 +52,15 @@ export function EventDetails({ refetch }: EventDetailsProps) {
 
       toast.success('Churras criado com sucesso! 123')
     } catch (error) {
-      toast.error('Preencha todos os campos corretamente!')
+      let message = 'Erro ao criar churras'
+
+      if (error instanceof z.ZodError) {
+        message = error.issues[0].message
+      }
+
+      toast.error(message)
+
+      throw error
     }
   }
 
@@ -64,12 +72,13 @@ export function EventDetails({ refetch }: EventDetailsProps) {
       <Formik
         initialValues={{} as FormValues}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          handleSubmit(values);
-
-          setSubmitting(false);
-          resetForm();
-          setAttendees([])
-          setFormKey(Math.random())
+          handleSubmit(values).then(() => {
+            resetForm();
+            setAttendees([])
+            setFormKey(Math.random())
+          }).finally(() => {
+            setSubmitting(false);
+          });
         }}
       >
         {({
@@ -141,6 +150,12 @@ export function EventDetails({ refetch }: EventDetailsProps) {
                   <IconButton
                     name="delete"
                     onClick={() => {
+                      if (!values.attendees) {
+                        setAttendees(attendees.filter((_, i) => i !== index))
+
+                        return
+                      }
+
                       const filterData = values.attendees.filter((_, i) => i !== index)
 
                       setValues({
@@ -163,13 +178,23 @@ export function EventDetails({ refetch }: EventDetailsProps) {
 }
 
 const schema = z.object({
-  date: z.string(),
-  address: z.string(),
-  description: z.string(),
+  description: z
+    .string({ required_error: 'Nome do churras é obrigatório' })
+    .min(3, { message: 'Nome do churras deve ter no mínimo 3 caracteres' }),
+  address: z
+    .string({ required_error: 'Endereço é obrigatório' })
+    .min(3, { message: 'Endereço deve ter no mínimo 3 caracteres' }),
+  date: z
+    .string({ required_error: 'Data é obrigatória' })
+    .min(3, { message: 'Data deve ter no mínimo 3 caracteres' }),
   attendees: z.array(z.object({
-    name: z.string(),
-    fee: z.string(),
-  }))
+    name: z
+      .string({ required_error: 'Nome do participante é obrigatório' })
+      .min(3, { message: 'Nome do participante deve ter no mínimo 3 caracteres' }),
+    fee: z
+      .string({ required_error: 'Valor do participante é obrigatório' })
+      .min(3, { message: 'Valor do participante deve ter no mínimo 3 caracteres' }),
+  }), { required_error: 'Participantes é obrigatório' })
 }).transform((data) => {
   return {
     ...data,
