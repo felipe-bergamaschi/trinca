@@ -9,8 +9,9 @@ import { PaidIcon } from '../../assets/svg/paid'
 import { PlaceIcon } from '../../assets/svg/place'
 import { DeleteIcon } from '../../assets/svg/delete'
 import { InfoIcon } from '../../assets/svg/info'
+import { ArrowBackIcon } from '../../assets/svg/arrowBack'
 
-type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add' | 'group' | 'paid' | 'place' | 'delete' | 'info';
+type IconName = 'home' | 'logout' | 'event' | 'notification' | 'settings' | 'add' | 'group' | 'paid' | 'place' | 'delete' | 'info' | 'arrow-back';
 
 export interface IconProps {
   name: IconName;
@@ -43,6 +44,8 @@ export function Icon({ name, size = 24, color = '#000' }: IconProps) {
         return <DeleteIcon />
       case 'info':
         return <InfoIcon />
+      case 'arrow-back':
+        return <ArrowBackIcon />
     }
   }
 
