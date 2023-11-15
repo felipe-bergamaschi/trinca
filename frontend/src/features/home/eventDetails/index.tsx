@@ -11,10 +11,12 @@ import { Formik } from "formik";
 import { Button } from "@/components/button";
 import { IconButton } from "@/components/iconButton";
 import { useState } from "react";
-import { formatCurrencyOnInput, formatCurrencyToSubmit } from "@/utils/formatCurrency";
+import { formatCurrencyOnInput, formatCurrencyToReal, formatCurrencyToSubmit } from "@/utils/formatCurrency";
 import toast from "react-hot-toast";
 import { z } from "zod";
 import { useCreateBarbecue } from "@/query";
+import { Alert } from "@/components/alert";
+import Decimal from "decimal.js";
 
 interface FormValues {
   date: string;
@@ -38,6 +40,18 @@ export function EventDetails({ refetch }: EventDetailsProps) {
 
   function addAttendees() {
     setAttendees([...attendees, { name: '', fee: '' }])
+  }
+
+  function sumTotal(values: FormValues['attendees']) {
+    if (!values) return formatCurrencyToReal(0)
+
+    const sum = values.reduce((acc, attendee) => {
+      const fee = formatCurrencyToSubmit(attendee?.fee || '0') || 0;
+
+      return new Decimal(acc).add(fee).toNumber()
+    }, 0)
+
+    return formatCurrencyToReal(sum)
   }
 
   async function handleSubmit(values: FormValues) {
@@ -168,6 +182,22 @@ export function EventDetails({ refetch }: EventDetailsProps) {
                   />
                 </Stack>
               ))}
+
+              <Stack direction="row" gap="md">
+                <Alert title="Quantidade de pessoas">
+                  {attendees.length}
+                </Alert>
+
+                <Alert title="Valor total">
+                  {sumTotal(values.attendees)}
+                </Alert>
+
+                {attendees.length > 0 && (
+                  <Stack style={{ minWidth: 48 }}>
+                    <span />
+                  </Stack>
+                )}
+              </Stack>
             </Box>
           </form>
         )}
