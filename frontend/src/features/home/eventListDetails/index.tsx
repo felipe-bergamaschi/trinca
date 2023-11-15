@@ -41,7 +41,7 @@ export function EventListDetails({ data, onClick }: EventListDetailsProps) {
           </Text>
         </Stack>
 
-        <Stack gap="sm" full>
+        <Stack gap="sm" full style={{ overflow: 'hidden' }}>
           <Text variant="h3">
             {data.description}
           </Text>

@@ -14,8 +14,8 @@ interface ContainerProps {
 export function Container({ title, breadcrumb, children, onClose }: ContainerProps) {
   return (
     <Stack align="center" full className={styles.container}>
-      <Stack full className={styles.content}>
-        <Stack padding="md" gap="md" full>
+      <Stack full className={styles.content} style={{ overflow: 'hidden' }}>
+        <Stack padding="md" gap="md" full style={{ overflow: 'auto' }}>
           <Stack direction="row" align="center" gap="md" justify="space-between">
             <Stack gap="sm">
               <Text size="lg">
