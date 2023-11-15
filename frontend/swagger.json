@@ -108,6 +108,64 @@
         },
         "type": "array"
       },
+      "ListBarbecueByIdResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "attendees": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "barbecueId": {
+                  "type": "number"
+                },
+                "fee": {
+                  "type": "number"
+                },
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "fee",
+                "barbecueId"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "address",
+          "attendees",
+          "createdAt",
+          "date",
+          "description",
+          "id"
+        ],
+        "type": "object"
+      },
       "CreateUserResponse": {
         "additionalProperties": false,
         "properties": {
@@ -245,6 +303,36 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListBarbecueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/barbecue/{id}": {
+      "get": {
+        "operationId": "listBarbecueById",
+        "tags": [
+          "Barbecue"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBarbecueByIdResponse"
                 }
               }
             }

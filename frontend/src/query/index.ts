@@ -43,6 +43,22 @@ export interface CreateUserResponse {
   name: string;
 }
 
+export type ListBarbecueByIdResponseAttendeesItem = {
+  barbecueId: number;
+  fee: number;
+  id: number;
+  name: string;
+};
+
+export interface ListBarbecueByIdResponse {
+  address: string;
+  attendees: ListBarbecueByIdResponseAttendeesItem[];
+  createdAt: string;
+  date: string;
+  description: string;
+  id: number;
+}
+
 export type ListBarbecueResponseItemAttendeesItem = {
   fee: number;
 };
@@ -168,6 +184,63 @@ export const useListBarbecue = <TData = Awaited<ReturnType<typeof listBarbecue>>
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
   const queryOptions = getListBarbecueQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+export const listBarbecueById = (
+    id: number,
+ signal?: AbortSignal
+) => {
+      
+      
+      return request<ListBarbecueByIdResponse>(
+      {url: `/barbecue/${id}`, method: 'get', signal
+    },
+      );
+    }
+  
+
+export const getListBarbecueByIdQueryKey = (id: number,) => {
+    
+    return [`/barbecue/${id}`] as const;
+    }
+
+    
+export const getListBarbecueByIdQueryOptions = <TData = Awaited<ReturnType<typeof listBarbecueById>>, TError = ErrorType<unknown>>(id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listBarbecueById>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListBarbecueByIdQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listBarbecueById>>> = ({ signal }) => listBarbecueById(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listBarbecueById>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListBarbecueByIdQueryResult = NonNullable<Awaited<ReturnType<typeof listBarbecueById>>>
+export type ListBarbecueByIdQueryError = ErrorType<unknown>
+
+export const useListBarbecueById = <TData = Awaited<ReturnType<typeof listBarbecueById>>, TError = ErrorType<unknown>>(
+ id: number, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listBarbecueById>>, TError, TData>>, }
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getListBarbecueByIdQueryOptions(id,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
