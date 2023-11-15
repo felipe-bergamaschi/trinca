@@ -16,6 +16,9 @@ export async function get() {
           fee: true,
         },
       },
+    },
+    orderBy: {
+      date: "desc",
     }
   });
 }
