@@ -13,7 +13,7 @@
     "test": "kita build --dry-run && tsc --noEmit"
   },
   "devDependencies": {
-    "@kitajs/cli": "^1.1.22",
+    "@kitajs/cli": "^1.1.23",
     "@kitajs/ts-plugin": "^1.1.16",
     "@types/source-map-support": "^0.5.10",
     "chokidar": "^3.5.3",
