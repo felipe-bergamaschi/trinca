@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.8.3",
     "axios": "^1.6.1",
+    "debounce": "^2.0.0",
     "decimal.js": "^10.4.3",
     "formik": "^2.4.5",
     "next": "14.0.1",
