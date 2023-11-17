@@ -1,21 +1,23 @@
 ## Getting Started
 
-Entre nos repositórios `backend` e `frontend` e instale as dependências
-
+Acesse o repositório do `frontend`, instale as dependências, faça o build da aplicação e execute o comando start
 ```bash
-cd backend && yarn
+cd frontend
 
-cd frontend && yarn
-```
+yarn install
 
-Após isso execute o comando `build` em cada um deles
-
-```bash
 yarn build
+
+yarn start
 ```
 
-Agora é só rodar o comando `start`
-
+Acesse o repositório do `backend`, instale as dependências, faça o build da aplicação e execute o comando start
 ```bash
+cd backend
+
+yarn install
+
+yarn build
+
 yarn start
 ```
